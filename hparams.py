@@ -33,8 +33,8 @@ hparams = tf.contrib.training.HParams(
 
 	#Hardware setup: Default supposes user has only one GPU: "/gpu:0" (Both Tacotron and WaveNet can be trained on multi-GPU: data parallelization)
 	#Synthesis also uses the following hardware parameters for multi-GPU parallel synthesis.
-	tacotron_num_gpus = 1, #Determines the number of gpus in use for Tacotron training.
-	wavenet_num_gpus = 1, #Determines the number of gpus in use for WaveNet training.
+	tacotron_num_gpus = 2, #Determines the number of gpus in use for Tacotron training.
+	wavenet_num_gpus = 2, #Determines the number of gpus in use for WaveNet training.
 	split_on_cpu = True, #Determines whether to split data on CPU or on first GPU. This is automatically True when more than 1 GPU is used. 
 		#(Recommend: False on slow CPUs/Disks, True otherwise for small speed boost)
 	###########################################################################################################################################
@@ -118,7 +118,7 @@ hparams = tf.contrib.training.HParams(
 
 	#Tacotron
 	#Model general type
-	outputs_per_step = 1, #number of frames to generate at each decoding step (increase to speed up computation and allows for higher batch size, decreases G&L audio quality)
+	outputs_per_step = 2, #number of frames to generate at each decoding step (increase to speed up computation and allows for higher batch size, decreases G&L audio quality)
 	stop_at_any = True, #Determines whether the decoder should stop when predicting <stop> to any frame or to all of them (True works pretty well)
 	batch_norm_position = 'after', #Can be in ('before', 'after'). Determines whether we use batch norm before or after the activation function (relu). Matter for debate.
 	clip_outputs = True, #Whether to clip spectrograms to T2_output_range (even in loss computation). ie: Don't penalize model for exceeding output range and bring back to borders.
